@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.hp.handleoffice"
+        multiDexEnabled true
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+android{
+    dexOptions{
+        javaMaxHeapSize "4g"
+    }
+    packagingOptions{
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile files('libs/activation.jar')
+    compile files('libs/additionnal.jar')
+    compile files('libs/ae-awt.jar')
+    compile files('libs/ae-docx4j-2.8.0-SNAPSHOT.jar')
+    compile files('libs/ae-jaxb-2.2.5.jar')
+    compile files('libs/ae-xmlgraphics-commons.jar')
+    compile files('libs/avalon-framework-api-4.3.1.jar')
+    compile files('libs/avalon-framework-impl-4.3.1.jar')
+    compile files('libs/commons-codec-1.3.jar')
+    compile files('libs/commons-io-1.3.1.jar')
+    compile files('libs/commons-lang-2.4.jar')
+    compile files('libs/commons-logging-1.1.1.jar')
+    compile files('libs/istack-commons-runtime.jar')
+    compile files('libs/JAXBNamespacePrefixMapper-2.2.4.jar')
+    compile files('libs/jaxp-datatype.jar')
+    compile files('libs/log4j-1.2.15.jar')
+    // compile files('libs/serializer-2.7.1.jar')
+    compile files('libs/android-logging-log4j-1.0.3.jar')
+    compile files('libs/stringtemplate-3.2.1.jar')
+    compile files('libs/txw2-20110809.jar')
+    compile files('libs/w3c-css.jar')
+    compile files('libs/ae-docx4j.jar')
+    compile files('libs/docx4j.jar')
+}
