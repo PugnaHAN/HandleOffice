@@ -35,7 +35,7 @@ public class AndroidDocxToHtmlActivity extends  TabActivity {
 
             String IMAGE_DIR_NAME = "images";
 
-            String baseURL = this.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE).toURL().toString();
+            String baseURL = this.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE).toURI().toURL().toString();
             System.out.println(baseURL); // file:/data/data/com.example.HelloAndroid/app_images/
 
             // Uncomment this to write image files to file system
