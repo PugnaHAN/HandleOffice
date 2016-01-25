@@ -14,17 +14,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/tabTitle"
         android:id="@+id/tv_code"
-        android:layout_gravity="center_horizontal"
-        android:background="#07fa64" />
+        android:scrollbars="vertical" />
 
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"/>
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:layout_width="wrap_content"

@@ -23,7 +23,7 @@ public class TabFragment extends Fragment {
     private ViewPager pager;
     private FragmentPagerAdapter adapter;
 
-    public static Fragment newInstance(){
+    public static TabFragment newInstance(){
         TabFragment tf = new TabFragment();
         return tf;
     }
