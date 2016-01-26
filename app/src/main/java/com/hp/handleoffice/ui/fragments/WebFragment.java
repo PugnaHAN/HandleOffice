@@ -15,7 +15,9 @@ import com.hp.handleoffice.R;
 public class WebFragment extends BaseFragment {
     private static final String TAG = WebFragment.class.getSimpleName();
 
-    WebView mWebView;
+    private WebView mWebView;
+    private String mHtml;
+    private String mBaseUrl;
 
     public static WebFragment newInstance(String title, int indicatorColor, int dividerColor){
         WebFragment webFragment = new WebFragment();
@@ -37,10 +39,27 @@ public class WebFragment extends BaseFragment {
                              Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_webview, container, false);
         mWebView = (WebView) v.findViewById(R.id.web_view);
+        if(mBaseUrl != null && mHtml != null){
+            mWebView.loadDataWithBaseURL(mBaseUrl, mHtml, "text/html", null, null);
+        }
         return v;
     }
 
     public WebView getWebView(){
         return mWebView;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, this.getClass().getSimpleName() + " is destroyed!!!");
+    }
+
+    public void setHtml(String html){
+        mHtml = html;
+    }
+
+    public void setBaseUrl(String baseUrl){
+        mBaseUrl = baseUrl;
     }
 }

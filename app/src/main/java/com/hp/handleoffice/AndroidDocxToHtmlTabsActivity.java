@@ -1,21 +1,14 @@
 package com.hp.handleoffice;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.hp.handleoffice.threads.HandleOfficeThread;
-import com.hp.handleoffice.ui.fragments.BaseFragment;
 import com.hp.handleoffice.ui.fragments.TabFragment;
 
 import java.lang.ref.WeakReference;
@@ -30,12 +23,16 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
     public static final int UPDATE_PDF = 1002;
     public static final int UPDATE_UI = 1003;
 
+    public static final String HTML_CODE = "html";
+    public static final String BASE_URL = "base_url";
+
     private static final String IMAGE_DIR_NAME = "images";
 
     private ProgressBar mProgressBar;
     private TabFragment mTabFragment;
 
-    private String mBaseURL;
+    private String mBaseURL = null;
+    private String mHtmlCode = null;
 
     private MyHandler mHandler = new MyHandler(this);
 
@@ -88,8 +85,9 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
             switch (msg.what){
                 case UPDATE_UI:
                     activity.mProgressBar.setVisibility(View.GONE);
+                    activity.mHtmlCode = msg.obj.toString();
                     activity.mTabFragment.updateUI(activity.mBaseURL,
-                            msg.obj.toString());
+                            activity.mHtmlCode);
                     break;
             }
         }

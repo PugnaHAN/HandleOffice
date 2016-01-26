@@ -17,7 +17,8 @@ import com.hp.handleoffice.R;
 public class CodeFragment extends BaseFragment {
     private static final String TAG = CodeFragment.class.getSimpleName();
 
-    TextView mTextView;
+    private String mHtml;
+    private TextView mTextView;
 
     public static CodeFragment newInstance(String title, int indicatorColor, int dividerColor){
         CodeFragment codeFragment = new CodeFragment();
@@ -39,11 +40,23 @@ public class CodeFragment extends BaseFragment {
         View v = inflater.inflate(R.layout.fragment_textview, container, false);
         mTextView = (TextView) v.findViewById(R.id.tv_code);
         mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
-
+        if(mHtml != null){
+            mTextView.setText(mHtml);
+        }
         return v;
     }
 
     public TextView getTextView(){
         return mTextView;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, this.getClass().getSimpleName() + " is destroyed!!!");
+    }
+
+    public void setHtml(String html){
+        mHtml = html;
     }
 }

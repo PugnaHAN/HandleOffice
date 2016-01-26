@@ -40,4 +40,10 @@ public class PdfFragment extends BaseFragment {
         mImageView = (ImageView) v.findViewById(R.id.img_view);
         return v;
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        Log.d(TAG, this.getClass().getSimpleName() + " is destroyed!!!");
+    }
 }

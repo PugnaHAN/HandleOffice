@@ -78,16 +78,18 @@ public class TabFragment extends Fragment {
         if(mFragments != null){
             WebFragment webViewFragment = (WebFragment)mFragments.get(0);
             if(webViewFragment != null){
+                webViewFragment.setHtml(html);
+                webViewFragment.setBaseUrl(baseURL);
                 WebView webView = webViewFragment.getWebView();
                 webView.loadDataWithBaseURL(baseURL, html, "text/html", null, null);
             }
 
             CodeFragment codeFragment = (CodeFragment)mFragments.get(1);
             if(codeFragment != null){
+                codeFragment.setHtml(html);
                 TextView textView = codeFragment.getTextView();
                 textView.setText(html);
             }
-
         }
     }
 
