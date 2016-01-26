@@ -33,6 +33,11 @@ public class TabViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object){
+        return POSITION_NONE;
+    }
+
+    @Override
     public CharSequence getPageTitle(int pos){
         return mFragments.get(pos).getTitle();
     }
