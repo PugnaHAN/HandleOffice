@@ -39,4 +39,8 @@ public class WebFragment extends BaseFragment {
         mWebView = (WebView) v.findViewById(R.id.web_view);
         return v;
     }
+
+    public WebView getWebView(){
+        return mWebView;
+    }
 }

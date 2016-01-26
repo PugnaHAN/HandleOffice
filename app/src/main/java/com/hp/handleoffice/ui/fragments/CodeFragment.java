@@ -1,12 +1,14 @@
 package com.hp.handleoffice.ui.fragments;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hp.handleoffice.AndroidDocxToHtmlTabsActivity;
 import com.hp.handleoffice.R;
 
 /**
@@ -36,6 +38,12 @@ public class CodeFragment extends BaseFragment {
                              Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_textview, container, false);
         mTextView = (TextView) v.findViewById(R.id.tv_code);
+        mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
+
         return v;
+    }
+
+    public TextView getTextView(){
+        return mTextView;
     }
 }

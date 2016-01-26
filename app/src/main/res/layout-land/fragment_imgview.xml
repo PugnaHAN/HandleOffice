@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ImageView
+        android:contentDescription="@string/pdfView"
+        android:id="@+id/img_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/tabTitle"
-        android:id="@+id/tv_code"
-        android:scrollbars="vertical" />
+        android:src="@color/colorAccent" />
     
-</FrameLayout>
+</LinearLayout>

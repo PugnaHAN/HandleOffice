@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.hp.handleoffice.R;
 import com.hp.handleoffice.ui.view.SlidingTabLayout;
@@ -23,6 +25,8 @@ public class TabFragment extends Fragment {
     private ViewPager pager;
     private FragmentPagerAdapter adapter;
 
+    private LinkedList<BaseFragment> mFragments = new LinkedList<>();
+
     public static TabFragment newInstance(){
         TabFragment tf = new TabFragment();
         return tf;
@@ -36,8 +40,8 @@ public class TabFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState){
-        final LinkedList<BaseFragment> fragments = getFragments();
-        adapter = new TabViewPagerAdapter(getFragmentManager(), fragments);
+        mFragments = getFragments();
+        adapter = new TabViewPagerAdapter(getFragmentManager(), mFragments);
 
         pager = (ViewPager) view.findViewById(R.id.content_pager);
         pager.setAdapter(adapter);
@@ -46,12 +50,12 @@ public class TabFragment extends Fragment {
         tabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
             public int getIndicatorColor(int position) {
-                return fragments.get(position).getIndicatorColor();
+                return mFragments.get(position).getIndicatorColor();
             }
 
             @Override
             public int getDividerColor(int position) {
-                return fragments.get(position).getDividerColor();
+                return mFragments.get(position).getDividerColor();
             }
         });
         tabLayout.setBackgroundResource(R.color.colorPrimary);
@@ -69,4 +73,22 @@ public class TabFragment extends Fragment {
 
         return fragments;
     }
+
+    public void updateUI(String baseURL, String html){
+        if(mFragments != null){
+            WebFragment webViewFragment = (WebFragment)mFragments.get(0);
+            if(webViewFragment != null){
+                WebView webView = webViewFragment.getWebView();
+                webView.loadDataWithBaseURL(baseURL, html, "text/html", null, null);
+            }
+
+            CodeFragment codeFragment = (CodeFragment)mFragments.get(1);
+            if(codeFragment != null){
+                TextView textView = codeFragment.getTextView();
+                textView.setText(html);
+            }
+
+        }
+    }
+
 }

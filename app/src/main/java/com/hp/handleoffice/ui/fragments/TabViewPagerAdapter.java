@@ -32,13 +32,34 @@ public class TabViewPagerAdapter extends FragmentPagerAdapter {
         return mFragments.size();
     }
 
-    @Override
-    public int getItemPosition(Object object){
-        return POSITION_NONE;
-    }
+//    @Override
+//    public int getItemPosition(Object object){
+//        return POSITION_NONE;
+//    }
 
     @Override
     public CharSequence getPageTitle(int pos){
         return mFragments.get(pos).getTitle();
     }
+
+/*  更新ViewPager的办法
+    public void setPagerItems(LinkedList<BaseFragment> fragments){
+        mFragments = fragments;
+    }
+
+    public interface OnReloadListener{
+        void onReload();
+    }
+
+    public void setOnReloadListener(OnReloadListener listener){
+        this.mListener = listener;
+    }
+
+    public void reload(){
+        if(mListener != null){
+            mListener.onReload();
+        }
+        this.notifyDataSetChanged();
+    }*/
+
 }

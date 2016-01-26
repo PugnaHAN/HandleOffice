@@ -1,11 +1,13 @@
 package com.hp.handleoffice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.webkit.WebView;
@@ -13,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hp.handleoffice.threads.HandleOfficeThread;
+import com.hp.handleoffice.ui.fragments.BaseFragment;
 import com.hp.handleoffice.ui.fragments.TabFragment;
 
 import java.lang.ref.WeakReference;
@@ -29,9 +32,8 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
 
     private static final String IMAGE_DIR_NAME = "images";
 
-    private WebView mWebView;
-    private TextView mTextView;
     private ProgressBar mProgressBar;
+    private TabFragment mTabFragment;
 
     private String mBaseURL;
 
@@ -41,10 +43,6 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
 
-        mWebView = (WebView) findViewById(R.id.web_view);
-        mTextView = (TextView) findViewById(R.id.tv_code);
-        mTextView.setScrollbarFadingEnabled(false);
-        mTextView.setMovementMethod(ScrollingMovementMethod.getInstance());
         mProgressBar = (ProgressBar) findViewById(R.id.waiting_bar);
 
         try {
@@ -54,19 +52,19 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
             e.printStackTrace();
         }
 
-        initTabFragment(savedInstanceState);
-
         HandleOfficeThread handleOfficeThread = new HandleOfficeThread(this, mHandler);
         handleOfficeThread.start();
+
+        initTabFragment(savedInstanceState);
     }
 
     private void initTabFragment(Bundle savedInstanceState){
         if(savedInstanceState == null){
-            TabFragment tabFragment = TabFragment.newInstance();
+            mTabFragment = TabFragment.newInstance();
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(R.id.content_fragment, tabFragment)
+                    .add(R.id.content_fragment, mTabFragment)
                     .commit();
         }
     }
@@ -90,10 +88,8 @@ public class AndroidDocxToHtmlTabsActivity extends FragmentActivity{
             switch (msg.what){
                 case UPDATE_UI:
                     activity.mProgressBar.setVisibility(View.GONE);
-                    activity.mWebView.loadDataWithBaseURL(activity.mBaseURL,
-                            msg.obj.toString(),
-                            "text/html", null, null);
-                    activity.mTextView.setText(msg.obj.toString());
+                    activity.mTabFragment.updateUI(activity.mBaseURL,
+                            msg.obj.toString());
                     break;
             }
         }
